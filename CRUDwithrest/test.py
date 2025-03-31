@@ -10,7 +10,18 @@ def get_data(id=None):
     resp = requests.get(Base_url+End_point,data=json.dumps(data))
     print(resp.status_code)
     print(resp.json())
-get_data(4)
+#get_data(4)
 
 
+def post_data(data):
+    resp = requests.post(Base_url+End_point,data=json.dumps(data))
+    print(resp.status_code)
+    print(resp.json())
 
+new_emp = {
+    'eno':105,
+    'ename':'Radhika',
+    'esal':19000,
+    'eadd':'Delhi'
+    }
+post_data(new_emp)
