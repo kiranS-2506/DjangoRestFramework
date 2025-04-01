@@ -37,6 +37,24 @@ class EmployeeCRUDCBV(View):
         else:
             json_data = JSONRenderer().render(serializer.errors)
             return HttpResponse(json_data,content_type='application/json',status=400)
+    def put(self,request):
+        json_data = request.body
+        stream = io.BytesIO(json_data)
+        pdata = JSONParser().parse(stream)
+        id = pdata.get('id')
+        emp = employee.objects.get(id=id)
+        serilizer = employeeSerializer(emp,data=pdata,partial=True)
+        if serilizer.is_valid():
+            serilizer.save()
+            
+            msg = {'msg':"record updated"}
+            jsaon_data= JSONRenderer().render(msg)
+            return HttpResponse(json_data,content_type="application/json")
+
+        else:
+            json_data=JSONRenderer().render(serilizer.errors)
+            return HttpResponse(json_data,content_type="application/json", status=400)
+
 
 
 

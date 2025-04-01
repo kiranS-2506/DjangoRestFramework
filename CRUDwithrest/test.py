@@ -24,4 +24,13 @@ new_emp = {
     'esal':19000,
     'eadd':'Delhi'
     }
-post_data(new_emp)
+def update_resource(id):
+    new_emp = {
+    'id':id,
+    'ename':'RGV'
+
+    }
+    resp = requests.put(Base_url+End_point,data=json.dumps(new_emp))
+    print(resp.status_code)
+    print(resp.json())
+update_resource(5)
