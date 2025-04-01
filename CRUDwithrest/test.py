@@ -24,6 +24,7 @@ new_emp = {
     'esal':19000,
     'eadd':'Delhi'
     }
+#post_data(new_emp)
 def update_resource(id):
     new_emp = {
     'id':id,
@@ -33,4 +34,12 @@ def update_resource(id):
     resp = requests.put(Base_url+End_point,data=json.dumps(new_emp))
     print(resp.status_code)
     print(resp.json())
-update_resource(5)
+#update_resource(5)
+def delete_resource(id):
+    data = {
+    'id':id,
+    }
+    resp = requests.delete(Base_url+End_point,data=json.dumps(data))
+    print(resp.status_code)
+    print(resp.json())
+#delete_resource()

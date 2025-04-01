@@ -54,6 +54,16 @@ class EmployeeCRUDCBV(View):
         else:
             json_data=JSONRenderer().render(serilizer.errors)
             return HttpResponse(json_data,content_type="application/json", status=400)
+    def delete(self,request):
+        json_data = request.body
+        stream =io.BytesIO(json_data)
+        pdata = JSONParser().parse(stream)
+        id = pdata.get('id')
+        emp = employee.objects.get(id=id)
+        emp.delete()
+        msg={'msg':"record deleted"}
+        return HttpResponse(JSONRenderer().render(msg),content_type='application/json')
+    
 
 
 
